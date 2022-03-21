@@ -2,13 +2,14 @@ import React from "react";
 import "./styles.css";
 import { Todo } from "../model";
 import SingleTodo from "./SingleTodo";
+import { Actions } from "../TodoReducer";
 
 interface Props {
   todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  dispatch: React.Dispatch<Actions>;
 }
 
-const TodoList: React.FC<Props> = ({ todos, setTodos }) => {
+const TodoList: React.FC<Props> = ({ todos, dispatch }) => {
   return (
     <div className="todos">
       <ul>
@@ -17,7 +18,7 @@ const TodoList: React.FC<Props> = ({ todos, setTodos }) => {
             todo={todo}
             key={todo.id}
             todos={todos}
-            setTodos={setTodos}
+            dispatch={dispatch}
           />
         ))}
       </ul>
