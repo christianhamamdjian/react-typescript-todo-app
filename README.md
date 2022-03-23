@@ -1,3 +1,3 @@
 # Tasking App
 
-using ReactJs Typescript useReducer
+using ReactJs Typescript useReducer and drag and drop
