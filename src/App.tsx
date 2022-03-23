@@ -3,13 +3,12 @@ import "./App.css";
 import InputField from "./components/InputField";
 import TodoList from "./components/TodoList";
 import TodoReducer from "./TodoReducer";
-import { Todo, initialState } from "./model";
+import { initialState } from "./model";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [state, dispatch] = useReducer(TodoReducer, initialState);
-  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +27,7 @@ const App: React.FC = () => {
       return;
     let add,
       active = state.active,
-      complete = completedTodos;
+      complete = state.complete;
     if (source.droppableId === "TodosList") {
       add = active[source.index];
       active.splice(source.index, 1);
@@ -36,13 +35,19 @@ const App: React.FC = () => {
       add = complete[source.index];
       complete.splice(source.index, 1);
     }
-    if (source.droppableId === "TodosList") {
+    if (destination.droppableId === "TodosList") {
       active.splice(destination.index, 0, add);
+      dispatch({
+        type: "active",
+        payload: active,
+      });
     } else {
       complete.splice(destination.index, 0, add);
+      dispatch({
+        type: "complete",
+        payload: complete,
+      });
     }
-    setCompletedTodos(complete);
-    // setCompletedTodos(active);
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -50,9 +55,8 @@ const App: React.FC = () => {
         <span className="heading">Tasking</span>
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
         <TodoList
-          todos={state.active}
-          completedTodos={completedTodos}
-          setCompletedTodos={setCompletedTodos}
+          activeTodos={state.active}
+          completedTodos={state.complete}
           dispatch={dispatch}
         />
       </div>

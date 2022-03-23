@@ -16,7 +16,12 @@ const TodoReducer = (state = initialState, action: Actions) => {
       return {
         active: [
           ...state.active,
-          { id: Date.now(), todo: action.payload, isDone: false },
+          {
+            id: Date.now(),
+            todo: action.payload,
+            isDone: false,
+            isComplete: false,
+          },
         ],
         complete: [...state.complete],
       };
@@ -31,12 +36,43 @@ const TodoReducer = (state = initialState, action: Actions) => {
         complete: [...state.complete],
       };
     case "remove":
-      const newActiveRemove = state.active.filter(
-        (todo) => todo.id !== action.payload
-      );
+      let newActiveRemove;
+      if (!action.payload.completed) {
+        newActiveRemove = state.active.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+        return {
+          active: [...newActiveRemove],
+          complete: [...state.complete],
+        };
+      } else {
+        newActiveRemove = state.complete.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+        return {
+          active: [...state.active],
+          complete: [...newActiveRemove],
+        };
+      }
+
+    case "active":
+      const newActiveDragged = action.payload.map((todo) => ({
+        ...todo,
+        isComplete: false,
+      }));
       return {
-        active: [...newActiveRemove],
+        active: [...newActiveDragged],
         complete: [...state.complete],
+      };
+    case "complete":
+      const newCompletedDone = action.payload.map((todo) => ({
+        ...todo,
+        isDone: true,
+        isComplete: true,
+      }));
+      return {
+        active: [...state.active],
+        complete: [...newCompletedDone],
       };
     default:
       return initialState;

@@ -5,13 +5,16 @@ import SingleTodo from "./SingleTodo";
 import { Droppable } from "react-beautiful-dnd";
 
 interface Props {
-  todos: Todo[];
+  activeTodos: Todo[];
   completedTodos: Todo[];
-  setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   dispatch: React.Dispatch<Actions>;
 }
 
-const TodoList: React.FC<Props> = ({ todos, completedTodos, dispatch }) => {
+const TodoList: React.FC<Props> = ({
+  activeTodos,
+  completedTodos,
+  dispatch,
+}) => {
   return (
     <div className="container">
       <Droppable droppableId="TodosList">
@@ -22,12 +25,12 @@ const TodoList: React.FC<Props> = ({ todos, completedTodos, dispatch }) => {
             {...provided.droppableProps}
           >
             <span className="todos__heading">Active tasks</span>
-            {todos.map((todo, index) => (
+            {activeTodos.map((todo, index) => (
               <SingleTodo
                 index={index}
                 todo={todo}
                 key={todo.id}
-                todos={todos}
+                todos={activeTodos}
                 dispatch={dispatch}
               />
             ))}

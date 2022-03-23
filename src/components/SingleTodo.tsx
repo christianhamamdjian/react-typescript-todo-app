@@ -17,8 +17,8 @@ const SingleTodo: React.FC<Props> = ({ todo, dispatch, index }) => {
   const handleDone = (id: number) => {
     dispatch({ type: "done", payload: id });
   };
-  const handleDelete = (id: number) => {
-    dispatch({ type: "remove", payload: id });
+  const handleDelete = (id: number, completed: boolean) => {
+    dispatch({ type: "remove", payload: { id, completed } });
   };
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
@@ -65,7 +65,10 @@ const SingleTodo: React.FC<Props> = ({ todo, dispatch, index }) => {
             >
               <AiFillEdit />
             </span>
-            <span className="icon" onClick={() => handleDelete(todo.id)}>
+            <span
+              className="icon"
+              onClick={() => handleDelete(todo.id, todo.isComplete)}
+            >
               <AiFillDelete />
             </span>
             <span className="icon" onClick={() => handleDone(todo.id)}>
