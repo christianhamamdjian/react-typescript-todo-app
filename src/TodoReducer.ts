@@ -1,34 +1,81 @@
-import { Todo } from "./model";
-interface Edit {
-    id: number;
-    todo: string;
+import { Actions, initialState } from "./model";
+
+const TodoReducer = (state = initialState, action: Actions) => {
+  switch (action.type) {
+    case "done":
+      const newActiveAdd = state.active.map((todo) => {
+        return todo.id === action.payload
+          ? { ...todo, isDone: !todo.isDone }
+          : todo;
+      });
+      return {
+        active: [...newActiveAdd],
+        complete: [...state.complete],
+      };
+    case "add":
+      return {
+        active: [
+          ...state.active,
+          {
+            id: Date.now(),
+            todo: action.payload,
+            isDone: false,
+            isComplete: false,
+          },
+        ],
+        complete: [...state.complete],
+      };
+    case "edit":
+      const newActiveEdit = state.active.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, todo: action.payload.todo }
+          : todo
+      );
+      return {
+        active: [...newActiveEdit],
+        complete: [...state.complete],
+      };
+    case "remove":
+      let newActiveRemove;
+      if (!action.payload.completed) {
+        newActiveRemove = state.active.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+        return {
+          active: [...newActiveRemove],
+          complete: [...state.complete],
+        };
+      } else {
+        newActiveRemove = state.complete.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+        return {
+          active: [...state.active],
+          complete: [...newActiveRemove],
+        };
+      }
+
+    case "active":
+      const newActiveDragged = action.payload.map((todo) => ({
+        ...todo,
+        isComplete: false,
+      }));
+      return {
+        active: [...newActiveDragged],
+        complete: [...state.complete],
+      };
+    case "complete":
+      const newCompletedDone = action.payload.map((todo) => ({
+        ...todo,
+        isDone: true,
+        isComplete: true,
+      }));
+      return {
+        active: [...state.active],
+        complete: [...newCompletedDone],
+      };
+    default:
+      return initialState;
   }
-export type Actions =
-    | { type: "done"; payload: number }
-    | { type: "add"; payload: string }
-    | { type: "edit"; payload: Edit }
-    | { type: "remove"; payload: number }
-
-const TodoReducer = (state: Todo[], action: Actions) => {
-    switch (action.type) {
-        case "done":
-            return state.map((todo) => {
-               return todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo
-            });
-        case "add":
-            return [
-                ...state,
-                { id: Date.now(), todo: action.payload, isDone: false }
-            ];
-        case "edit":
-            return state.map((todo) => (todo.id === action.payload.id ? { ...todo, todo: action.payload.todo } : todo));
-        case "remove":
-            return state.filter((todo) => todo.id !== action.payload);
-        default:
-            return state;
-
-    }
 };
 export default TodoReducer;
-
-

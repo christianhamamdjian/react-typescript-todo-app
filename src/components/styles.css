@@ -52,6 +52,7 @@
 }
 
 .todos {
+  border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -61,22 +62,22 @@
   background-color: rgb(255, 255, 255);
 }
 
+.remove {
+  background-color: rgb(204, 204, 204);
+}
+
 .dragactive {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(214, 214, 214);
 }
 
 .dragcomplete {
-  background-color: rgb(255, 255, 255);
-}
-
-.remove {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(180, 180, 180);
 }
 
 .todos__heading {
-  font-size: 5rem;
+  font-size: 2rem;
   /* text-align: center; */
-  color: white;
+  color: rgb(73, 73, 73);
 }
 
 .todos__single {
