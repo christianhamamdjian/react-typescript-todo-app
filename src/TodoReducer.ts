@@ -58,6 +58,7 @@ const TodoReducer = (state = initialState, action: Actions) => {
     case "active":
       const newActiveDragged = action.payload.map((todo) => ({
         ...todo,
+        isDone: false,
         isComplete: false,
       }));
       return {

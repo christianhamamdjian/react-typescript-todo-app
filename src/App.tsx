@@ -51,14 +51,22 @@ const App: React.FC = () => {
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="App">
-        <span className="heading">Tasking</span>
-        <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-        <TodoList
-          activeTodos={state.active}
-          completedTodos={state.complete}
-          dispatch={dispatch}
-        />
+      <div className="app">
+        <div className="container">
+          <div className="container__content">
+            <h2>Tasking</h2>
+            <div className="container__forms">
+              <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+            </div>
+            <div className="container__todos">
+              <TodoList
+                activeTodos={state.active}
+                completedTodos={state.complete}
+                dispatch={dispatch}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </DragDropContext>
   );
