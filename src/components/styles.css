@@ -1,69 +1,99 @@
+.heading {
+  text-transform: uppercase;
+  font-size: 24px;
+  margin: 30px 0;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+  text-align: center;
+}
+
 .input {
   display: flex;
-  width: 95%;
-  position: relative;
-  align-items: center;
+  justify-content: center;
 }
 
 .input__box {
-  width: 100%;
-  border-radius: 16px;
-  padding: 20px 30px;
-  font-size: 1.2rem;
+  border-radius: 6px;
+  padding: 10px 30px;
+  margin-right: 4px;
+  font-size: 1rem;
   border: 1px solid #4d4d4d;
   transition: 0.2s;
 }
 
 .input__box:focus {
-  box-shadow: 0 0 10px 1000px rgba(235, 235, 235, 0.5);
+  box-shadow: 0 0 10px 1200px rgba(0, 0, 0, 0.5);
   outline: none;
 }
 
 .input_submit {
-  position: absolute;
-  width: auto;
-  height: auto;
-  padding: 4px 12px;
-  margin: 12px;
-  border-radius: 10px;
-  right: 0px;
-  border: 1px solid #4d4d4d;
-  font-size: 15px;
-  background-color: #ffffff;
-  color: rgb(111, 111, 111);
-  transition: 0.2s all;
+  border: none;
+  border-radius: 4px;
+  background: rgb(252, 164, 0);
+  color: rgb(255, 255, 255);
+  padding: 10px 25px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: all 0.1s ease;
+  cursor: pointer;
 }
 
 .input_submit:hover {
-  background-color: #ffffff;
+  background-color: rgb(250, 185, 65);
 }
 
 .input_submit:active {
   transform: scale(0.8);
   box-shadow: 0 0 5px black;
 }
-
-.container {
-  width: 95%;
-  display: flex;
-  margin-top: 10px;
-  justify-content: space-between;
-  align-items: flex-start;
+.edit__btn {
+  border: none;
+  color: rgb(103, 169, 5);
+  font-size: 20px;
+  background-color: transparent;
+  transition: all 0.1s ease;
+  margin: 0px 0px 0px 10px;
+  padding: 0;
+  cursor: pointer;
 }
-
-.todos {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.container {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  width: 47.5%;
+  flex-flow: column wrap;
+  align-items: center;
+  top: 90px;
+}
+.container__content {
+  border: 1px solid lightgray;
+  padding: 40px 10%;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
+  z-index: 999;
+}
+.container__content .container__forms {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.container__todos {
+  display: block;
+  text-align: center;
+}
+.container__content h2 {
+  text-transform: uppercase;
+  margin: -10px 0 10px 0;
+  color: #fff;
+  text-align: center;
+}
+.todos {
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
   padding: 15px;
   margin-top: 15px;
   background-color: rgb(255, 255, 255);
 }
 
 .remove {
-  background-color: rgb(204, 204, 204);
+  background-color: rgb(194, 179, 162);
 }
 
 .dragactive {
@@ -75,20 +105,29 @@
 }
 
 .todos__heading {
-  font-size: 2rem;
-  /* text-align: center; */
-  color: rgb(73, 73, 73);
+  text-transform: uppercase;
+  margin: -10px 0 10px 0;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(121, 121, 121);
 }
 
 .todos__single {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
   border-radius: 5px;
   border: 1px solid #4d4d4d;
-  padding: 20px;
+  padding: 4px 5px;
   margin-top: 5px;
   transition: 0.2s;
 }
-
+.todo__controlls {
+  background-color: rgb(233, 233, 233);
+  padding: 4px 4px 2px;
+  border-radius: 3px;
+}
 .drag {
   box-shadow: 0 0 20px black;
 }
@@ -98,39 +137,33 @@
 }
 
 .todos__single--text {
-  flex: 1;
-  padding: 5px;
+  padding: 0px 10px;
+  max-width: 10rem;
+  font-size: 1rem;
+  overflow-x: auto;
+  border: 0px solid transparent;
+  margin-right: 5px;
   border-radius: 4px;
-  font-size: 20px;
 }
 
-.todos__single--text:focus {
+.todos__single--text:focus,
+.todos__single--text input {
   outline: none;
-  border: 1px solid #4d4d4d;
+  padding: 0px 10px;
+  margin: 0px;
+  border: 0;
 }
 
 .icon {
   margin-left: 10px;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-@media (max-width: 1100px) {
-  .todos {
-    width: 45%;
-  }
+/* @media (max-width: 1100px) {
+
 }
 
 @media (max-width: 700px) {
-  .input {
-    width: 95%;
-  }
-  .container {
-    width: 95%;
-    flex-direction: column;
-  }
-  .todos {
-    width: 95%;
-    margin-bottom: 10px;
-  }
-}
+ 
+} */
