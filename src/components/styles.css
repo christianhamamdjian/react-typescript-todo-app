@@ -15,13 +15,14 @@
 .input__box {
   border-radius: 6px;
   padding: 10px 30px;
+  margin-right: 4px;
   font-size: 1rem;
   border: 1px solid #4d4d4d;
   transition: 0.2s;
 }
 
 .input__box:focus {
-  box-shadow: 0 0 10px 1000px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px 1200px rgba(0, 0, 0, 0.5);
   outline: none;
 }
 
@@ -92,7 +93,7 @@
 }
 
 .remove {
-  background-color: rgb(204, 175, 175);
+  background-color: rgb(194, 179, 162);
 }
 
 .dragactive {
